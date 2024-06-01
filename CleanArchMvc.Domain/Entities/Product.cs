@@ -47,7 +47,7 @@ public sealed class Product:Entity
 
         DomainExceptionValidation.When(stock < 0, "Invalid stock value");
 
-        DomainExceptionValidation.When(image!.Length > 250, "Invalid image name. Too long, maximum 250 characters");
+        DomainExceptionValidation.When(image?.Length > 250, "Invalid image name. Too long, maximum 250 characters"); // Adicionado o operador de nullabilidade para image ?. se a imagem for nula, não será verificado o comprimento da string e não lançará uma exceção.
 
         this.Name = name;
         this.Description = description;

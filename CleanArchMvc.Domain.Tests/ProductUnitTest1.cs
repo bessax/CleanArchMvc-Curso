@@ -89,5 +89,18 @@ public class ProductUnitTest1
         action.Should().Throw<DomainExceptionValidation>().WithMessage("Invalid stock value");
     }
 
+    [Fact(DisplayName = "Create Product With Null Image Name No DomainException")]
+    public void CreateProduct_WithNullImageName_ResultNoDomainException()
+    {
+        Action action = () => new Product(1, "Product Name", "Description Name", 100.00m, 10, null);
+        action.Should().NotThrow<DomainExceptionValidation>();
+    }
+
+    [Fact(DisplayName = "Create Product With Null Image Name No Reference Exception")]
+    public void CreateProduct_WithNullImageName_ResultNoNullReferenceException()
+    {
+        Action action = () => new Product(1, "Product Name", "Description Name", 100.00m, 10, null);
+        action.Should().NotThrow<NullReferenceException>();
+    }
 
 }
