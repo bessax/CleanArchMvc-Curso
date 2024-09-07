@@ -12,7 +12,7 @@ public class ProductDTO
     [MinLength(3)]
     [MaxLength(100)]
     [DisplayName("Name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required(ErrorMessage = "The Description is Required")]
     [MinLength(5)]
