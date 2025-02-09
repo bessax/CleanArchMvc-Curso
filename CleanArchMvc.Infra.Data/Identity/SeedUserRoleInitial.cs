@@ -13,63 +13,61 @@ public class SeedUserRoleInitial : ISeedUserRoleInitial
         _roleManager = roleManager;
     }
 
-    public async Task SeedRolesAsync()
+    public void SeedRoles()
     {
-        if (!await _roleManager.RoleExistsAsync("Admin"))
+        if (!_roleManager.RoleExistsAsync("User").Result)
         {
-            var role = new IdentityRole { 
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            };
-            await _roleManager.CreateAsync(role);
+            IdentityRole role = new IdentityRole();
+            role.Name = "User";
+            role.NormalizedName = "USER";
+            IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
         }
-        if (!await _roleManager.RoleExistsAsync("User"))
+        if (!_roleManager.RoleExistsAsync("Admin").Result)
         {
-            var role = new IdentityRole { 
-                Name = "User",
-                NormalizedName="USER"
-            };
-            await _roleManager.CreateAsync(role);
+            IdentityRole role = new IdentityRole();
+            role.Name = "Admin";
+            role.NormalizedName = "ADMIN";
+            IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
         }
     }
 
-    public async Task SeedUsersAsync()
+    public void SeedUsers()
     {
-        if (await _userManager.FindByEmailAsync("usuario@localhost") == null)
+        if (_userManager.FindByEmailAsync("usuario@localhost").Result == null)
         {
-            var user = new ApplicationUser
-            {
-                UserName = "usuario@localhost",
-                Email = "usuario@localhost",
-                NormalizedUserName = "USUARIO@LOCALHOST",
-                NormalizedEmail = "USUARIO@LOCALHOST",
-                LockoutEnabled = false,
-                EmailConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
-            var result = await _userManager.CreateAsync(user, "Numsey@123456");
+            ApplicationUser user = new ApplicationUser();
+            user.UserName = "usuario@localhost";
+            user.Email = "usuario@localhost";
+            user.NormalizedUserName = "USUARIO@LOCALHOST";
+            user.NormalizedEmail = "USUARIO@LOCALHOST";
+            user.EmailConfirmed = true;
+            user.LockoutEnabled = false;
+            user.SecurityStamp = Guid.NewGuid().ToString();
+
+            IdentityResult result = _userManager.CreateAsync(user, "Numsey#2021").Result;
+
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "User");
+                _userManager.AddToRoleAsync(user, "User").Wait();
             }
         }
 
-        if (await _userManager.FindByEmailAsync("admin@localhost") == null)
+        if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
         {
-            var user = new ApplicationUser
-            {
-                UserName = "admin@localhost",
-                Email = "admin@localhost",
-                NormalizedUserName = "ADMIN@LOCALHOST",
-                NormalizedEmail = "ADMIN@LOCALHOST",
-                LockoutEnabled = false,
-                EmailConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
-            var result = await _userManager.CreateAsync(user, "Numsey@123456");
+            ApplicationUser user = new ApplicationUser();
+            user.UserName = "admin@localhost";
+            user.Email = "admin@localhost";
+            user.NormalizedUserName = "ADMIN@LOCALHOST";
+            user.NormalizedEmail = "ADMIN@LOCALHOST";
+            user.EmailConfirmed = true;
+            user.LockoutEnabled = false;
+            user.SecurityStamp = Guid.NewGuid().ToString();
+
+            IdentityResult result = _userManager.CreateAsync(user, "Numsey#2021").Result;
+
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Admin");
+                _userManager.AddToRoleAsync(user, "Admin").Wait();
             }
         }
     }
