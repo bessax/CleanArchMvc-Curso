@@ -1,4 +1,4 @@
-# Projeto de Curso: Clean Architecture Essencial - ASP .NET Core com C#
+# Projeto de Curso: [Clean Architecture Essencial - ASP .NET Core com C#](https://www.udemy.com/course/clean-architecture-essencial-asp-net-core-com-c/)
 
 ## 📌 Sobre o Projeto
 Este projeto faz parte do curso de Clean Architecture Essencial - ASP .NET Core com C#. O objetivo é demonstrar a implementação de uma arquitetura limpa em um sistema, aplicando boas práticas de design de software para garantir modularidade, testabilidade e facilidade de manutenção.
