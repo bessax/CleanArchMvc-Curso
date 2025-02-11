@@ -31,7 +31,7 @@ O projeto segue a estrutura recomendada pela Clean Architecture:
 - Entity Framework Core
 - MediatR (para manipulação de casos de uso)
 - AutoMapper (para mapeamento de objetos)
-- xUnit / NUnit (para testes automatizados)
+- xUnit (para testes automatizados)
 
 ## 🚀 Como Executar o Projeto
 1. Clone o repositório:
